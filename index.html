@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Galerie de Photos Interactive</title>
+    <style>
+        /* Style pour les images et la galerie */
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+        .gallery img {
+            width: 200px;
+            height: auto;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+        .gallery img:hover {
+            transform: scale(1.1);
+        }
+        .image-description {
+            text-align: center;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Ma Galerie de Photos</h1>
+
+    <div class="gallery">
+        <!-- Images de la galerie -->
+        <img src="image1.jpg" alt="Description de l'image 1" tabindex="0" id="image1" onmouseover="updateImage(this)" onmouseleave="resetImage()" onfocus="focusImage(this)" onblur="blurImage(this)">
+        <img src="image2.jpg" alt="Description de l'image 2" tabindex="0" id="image2" onmouseover="updateImage(this)" onmouseleave="resetImage()" onfocus="focusImage(this)" onblur="blurImage(this)">
+        <img src="image3.jpg" alt="Description de l'image 3" tabindex="0" id="image3" onmouseover="updateImage(this)" onmouseleave="resetImage()" onfocus="focusImage(this)" onblur="blurImage(this)">
+        <img src="image4.jpg" alt="Description de l'image 4" tabindex="0" id="image4" onmouseover="updateImage(this)" onmouseleave="resetImage()" onfocus="focusImage(this)" onblur="blurImage(this)">
+        <img src="image5.jpg" alt="Description de l'image 5" tabindex="0" id="image5" onmouseover="updateImage(this)" onmouseleave="resetImage()" onfocus="focusImage(this)" onblur="blurImage(this)">
+        <img src="image6.jpg" alt="Description de l'image 6" tabindex="0" id="image6" onmouseover="updateImage(this)" onmouseleave="resetImage()" onfocus="focusImage(this)" onblur="blurImage(this)">
+    </div>
+
+    <div class="image-description" id="image-description">
+        Survolez ou sélectionnez une image pour voir sa description.
+    </div>
+
+    <script>
+        // Fonction pour mettre à jour l'image lorsqu'on la survole
+        function updateImage(img) {
+            console.log("Image survolée : " + img.alt);
+            document.getElementById('image-description').textContent = img.alt;
+            img.style.transform = "scale(1.1)";
+        }
+
+        // Fonction pour réinitialiser l'image après le survol
+        function resetImage() {
+            console.log("Image non survolée.");
+            document.getElementById('image-description').textContent = "Survolez ou sélectionnez une image pour voir sa description.";
+        }
+
+        // Fonction qui est déclenchée lors du focus sur une image
+        function focusImage(img) {
+            console.log("Image en focus : " + img.alt);
+            img.style.borderColor = "blue"; // Change la couleur de la bordure
+        }
+
+        // Fonction qui est déclenchée lors du blur (perte de focus) d'une image
+        function blurImage(img) {
+            console.log("Image perdant le focus : " + img.alt);
+            img.style.borderColor = "#ccc"; // Réinitialise la couleur de la bordure
+        }
+
+        // Fonction qui s'exécute lorsque la page est entièrement chargée
+        window.onload = function() {
+            console.log("Page chargée et prête.");
+        }
+
+        // Boucle pour ajouter l'attribut tabindex à chaque image
+        let images = document.querySelectorAll('.gallery img');
+        for (let i = 0; i < images.length; i++) {
+            images[i].setAttribute('tabindex', i + 1);
+        }
+    </script>
+
+</body>
+</html>
